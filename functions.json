@@ -1,0 +1,81 @@
+{
+  "functions": [
+    {
+      "description": "Get swap rate",
+      "id": "BG_SwapRate",
+      "name": "BG_SwapRate",
+      "parameters": [
+        {
+          "description": "token",
+          "name": "token",
+          "type": "string"
+        },
+        {
+          "description": "index",
+          "name": "index",
+          "type": "string"
+        },
+        {
+          "description": "start date",
+          "name": "start_date",
+          "type": "string"
+        },
+        {
+          "description": "maturity date",
+          "name": "maturity_date",
+          "type": "string"
+        },
+        {
+          "description": "payment frequency",
+          "name": "payment_frequency",
+          "type": "string"
+        },
+        {
+          "description": "valuation time",
+          "name": "valuation_time",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "result": {
+        "type": "number"
+      }
+    },
+    {
+      "description": "Get forward rate",
+      "id": "BG_ForwardRate",
+      "name": "BG_ForwardRate",
+      "parameters": [
+        {
+          "description": "token",
+          "name": "token",
+          "type": "string"
+        },
+        {
+          "description": "index",
+          "name": "index",
+          "type": "string"
+        },
+        {
+          "description": "start date",
+          "name": "start_date",
+          "type": "string"
+        },
+        {
+          "description": "end date",
+          "name": "maturity_date",
+          "type": "string"
+        },
+        {
+          "description": "valuation time",
+          "name": "valuation_time",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "result": {
+        "type": "number"
+      }
+    }
+  ]
+}
