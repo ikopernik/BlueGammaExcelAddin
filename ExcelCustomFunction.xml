@@ -34,7 +34,7 @@
     <Host Name="Workbook" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="~/taskpane.html" />
+    <SourceLocation DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/taskpane.html" />
   </DefaultSettings>
   <!-- End TaskPane Mode integration.  -->
 
