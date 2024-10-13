@@ -16,8 +16,8 @@
   <ProviderName>[Provider name]</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
-  <DisplayName DefaultValue="ExcelCustomFunction" />
-  <Description DefaultValue="ExcelCustomFunction"/>
+  <DisplayName DefaultValue="BlueGamma Excel add-in" />
+  <Description DefaultValue="BlueGamma Excel add-in"/>
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
   <IconUrl DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button32x32.png" />
 
@@ -139,7 +139,7 @@
 		<bt:String id="Functions.Namespace" DefaultValue="BlueGamma" />
         <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
 				<bt:String id="Contoso.FunctionButton.Label" DefaultValue="Run Function" />
-        <bt:String id="Contoso.Group1Label" DefaultValue="Commands Group" />
+        <bt:String id="Contoso.Group1Label" DefaultValue="BlueGamma" />
         <bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
       </bt:ShortStrings>
       <bt:LongStrings>
