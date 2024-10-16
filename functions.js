@@ -11,7 +11,7 @@
  * @param {string} valuation_time Valuation time
  * @returns {string} Swap rate
  */
-async function BG_SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
+async function SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
     const params = new URLSearchParams({
         index: index,
         start_date: start_date,
@@ -57,7 +57,7 @@ async function BG_SwapRate(token, index, start_date, maturity_date, payment_freq
  * @param {string} valuation_time Valuation time
  * @returns {string} Forward rate
  */
-async function BG_ForwardRate(token, index, start_date, end_date, valuation_time = "") {
+async function ForwardRate(token, index, start_date, end_date, valuation_time = "") {
     const params = new URLSearchParams({
         index: index,
         start_date: start_date,
