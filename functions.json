@@ -2,8 +2,8 @@
   "functions": [
     {
       "description": "Get swap rate",
-      "id": "BG_SwapRate",
-      "name": "BG_SwapRate",
+      "id": "SwapRate",
+      "name": "SwapRate",
       "parameters": [
         {
           "description": "token",
@@ -43,8 +43,8 @@
     },
     {
       "description": "Get forward rate",
-      "id": "BG_ForwardRate",
-      "name": "BG_ForwardRate",
+      "id": "ForwardRate",
+      "name": "ForwardRate",
       "parameters": [
         {
           "description": "token",

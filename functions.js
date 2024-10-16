@@ -92,5 +92,5 @@ async function BG_ForwardRate(token, index, start_date, end_date, valuation_time
     }
 }
 
-CustomFunctions.associate("BG_SwapRate", BG_SwapRate);
-CustomFunctions.associate("BG_ForwardRate", BG_ForwardRate);
+CustomFunctions.associate("SwapRate", SwapRate);
+CustomFunctions.associate("ForwardRate", ForwardRate);
