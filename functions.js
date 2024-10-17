@@ -12,13 +12,13 @@
  * @returns {string} Swap rate
  */
 async function SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
-    start_date_val = await GetDate(start_date);
-    maturity_date_val = await GetDate(maturity_date);
+    start_date = await GetDate(start_date);
+    maturity_date = await GetDate(maturity_date);
 
     const params = new URLSearchParams({
         index: index,
-        start_date: start_date_val,
-        maturity_date: maturity_date_val,
+        start_date: start_date,
+        maturity_date: maturity_date,
         payment_frequency: payment_frequency
     });
 
@@ -117,6 +117,7 @@ async function GetDate(dateInput) {
 
         // Try to parse the cell value as a date
         date = new Date(cellValue);
+        return date;
     } else {
         // Otherwise, assume it's a direct date string
         date = new Date(dateInput);
@@ -126,7 +127,6 @@ async function GetDate(dateInput) {
     if (isNaN(date.getTime())) {
         throw new Error("Invalid date input");
     }
-
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const day = String(date.getDate()).padStart(2, '0');
