@@ -115,9 +115,14 @@ async function GetDate(dateInput) {
         // Wait for the range operation to complete
         const cellValue = await range;
 
-        // Try to parse the cell value as a date
-        date = new Date(cellValue);
-        return date;
+        // Check if the cell value is a number (Excel date)
+        if (typeof cellValue === "number") {
+            // Convert Excel date to JavaScript date
+            return new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
+        } else {
+            // Assume it's a direct date string
+            return new Date(cellValue);
+        }
     } else {
         // Otherwise, assume it's a direct date string
         date = new Date(dateInput);
