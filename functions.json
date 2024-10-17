@@ -42,40 +42,56 @@
       }
     },
     {
-      "description": "Get forward rate",
-      "id": "ForwardRate",
-      "name": "ForwardRate",
-      "parameters": [
-        {
-          "description": "token",
-          "name": "token",
-          "type": "string"
-        },
-        {
-          "description": "index",
-          "name": "index",
-          "type": "string"
-        },
-        {
-          "description": "start date",
-          "name": "start_date",
-          "type": "string"
-        },
-        {
-          "description": "end date",
-          "name": "maturity_date",
-          "type": "string"
-        },
-        {
-          "description": "valuation time",
-          "name": "valuation_time",
-          "type": "string",
-          "required": false
+        "description": "Get forward rate",
+        "id": "ForwardRate",
+        "name": "ForwardRate",
+        "parameters": [
+            {
+                "description": "token",
+                "name": "token",
+                "type": "string"
+            },
+            {
+                "description": "index",
+                "name": "index",
+                "type": "string"
+            },
+            {
+                "description": "start date",
+                "name": "start_date",
+                "type": "string"
+            },
+            {
+                "description": "end date",
+                "name": "maturity_date",
+                "type": "string"
+            },
+            {
+                "description": "valuation time",
+                "name": "valuation_time",
+                "type": "string",
+                "required": false
+            }
+        ],
+        "result": {
+            "type": "number"
         }
-      ],
-      "result": {
-        "type": "number"
-      }
+    },
+    {
+        "id": "GetDate",
+        "name": "GetDate",
+        "description": "Returns the year from the given date string or cell reference.",
+        "parameters": [
+            {
+                "name": "DateInput",
+                "description": "The date as a string or a reference to a cell containing a date.",
+                "type": "string"
+            }
+        ],
+        "result": {
+            "type": "number",
+            "description": "The year extracted from the provided date."
+        }
     }
   ]
 }

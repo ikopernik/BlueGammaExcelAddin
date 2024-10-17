@@ -92,5 +92,45 @@ async function ForwardRate(token, index, start_date, end_date, valuation_time = 
     }
 }
 
+async function GetDate(dateInput) {
+    let date;
+
+    // Check if dateInput is a cell reference
+    if (/^[A-Z]+\d+$/.test(dateInput)) {
+        // Assume dateInput is a cell reference, retrieve the value
+        const range = Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const cell = sheet.getRange(dateInput);
+            cell.load("values");
+            await context.sync();
+            return cell.values[0][0]; // Get the value of the cell
+        });
+
+        // Wait for the range operation to complete
+        const cellValue = await range;
+
+        // Try to parse the cell value as a date
+        date = new Date(cellValue);
+    } else {
+        // Otherwise, assume it's a direct date string
+        date = new Date(dateInput);
+    }
+
+    // Perform your logic with the date
+    if (isNaN(date.getTime())) {
+        throw new Error("Invalid date input");
+    }
+
+    return date.getFullYear(); // Example: returning the year
+}
+
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 CustomFunctions.associate("SwapRate", SwapRate);
 CustomFunctions.associate("ForwardRate", ForwardRate);
+CustomFunctions.associate("GetDate", GetDate);
