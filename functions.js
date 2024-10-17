@@ -12,8 +12,8 @@
  * @returns {string} Swap rate
  */
 async function SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
-    start_date = GetDate(start_date);
-    maturity_date = GetDate(maturity_date);
+    start_date = await GetDate(start_date);
+    maturity_date = await GetDate(maturity_date);
 
     const params = new URLSearchParams({
         index: index,
@@ -61,8 +61,8 @@ async function SwapRate(token, index, start_date, maturity_date, payment_frequen
  * @returns {string} Forward rate
  */
 async function ForwardRate(token, index, start_date, end_date, valuation_time = "") {
-    start_date = GetDate(start_date);
-    end_date = GetDate(end_date);
+    start_date = await GetDate(start_date);
+    end_date = await GetDate(end_date);
 
     const params = new URLSearchParams({
         index: index,
@@ -127,7 +127,10 @@ async function GetDate(dateInput) {
         throw new Error("Invalid date input");
     }
 
-    return date; // Example: returning the year
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 function formatDate(date) {
