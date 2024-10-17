@@ -111,7 +111,7 @@ async function GetDate(dateInput) {
 
         // Try to parse the cell value as a date
         //date = new Date(cellValue);
-        return cellValue;
+        return "12";// cellValue;
     } else {
         // Otherwise, assume it's a direct date string
         date = new Date(dateInput);
