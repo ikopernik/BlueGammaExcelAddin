@@ -12,13 +12,13 @@
  * @returns {string} Swap rate
  */
 async function SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
-    start_date = await GetDate(start_date);
-    maturity_date = await GetDate(maturity_date);
+    start_date_val = await GetDate(start_date);
+    maturity_date_val = await GetDate(maturity_date);
 
     const params = new URLSearchParams({
         index: index,
-        start_date: start_date,
-        maturity_date: maturity_date,
+        start_date: start_date_val,
+        maturity_date: maturity_date_val,
         payment_frequency: payment_frequency
     });
 
