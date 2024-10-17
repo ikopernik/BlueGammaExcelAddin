@@ -12,6 +12,9 @@
  * @returns {string} Swap rate
  */
 async function SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
+    start_date = GetDate(start_date);
+    maturity_date = GetDate(maturity_date);
+
     const params = new URLSearchParams({
         index: index,
         start_date: start_date,
@@ -58,6 +61,9 @@ async function SwapRate(token, index, start_date, maturity_date, payment_frequen
  * @returns {string} Forward rate
  */
 async function ForwardRate(token, index, start_date, end_date, valuation_time = "") {
+    start_date = GetDate(start_date);
+    end_date = GetDate(end_date);
+
     const params = new URLSearchParams({
         index: index,
         start_date: start_date,
@@ -110,8 +116,7 @@ async function GetDate(dateInput) {
         const cellValue = await range;
 
         // Try to parse the cell value as a date
-        //date = new Date(cellValue);
-        return "12";// cellValue;
+        date = new Date(cellValue);
     } else {
         // Otherwise, assume it's a direct date string
         date = new Date(dateInput);
@@ -122,7 +127,7 @@ async function GetDate(dateInput) {
         throw new Error("Invalid date input");
     }
 
-    return date.getFullYear(); // Example: returning the year
+    return date; // Example: returning the year
 }
 
 function formatDate(date) {
