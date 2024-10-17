@@ -110,7 +110,8 @@ async function GetDate(dateInput) {
         const cellValue = await range;
 
         // Try to parse the cell value as a date
-        date = new Date(cellValue);
+        //date = new Date(cellValue);
+        return cellValue;
     } else {
         // Otherwise, assume it's a direct date string
         date = new Date(dateInput);
