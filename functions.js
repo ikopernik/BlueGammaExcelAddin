@@ -97,7 +97,6 @@ async function ForwardRate(token, index, start_date, end_date, valuation_time = 
         throw error;
     }
 }
-
 async function GetDate(dateInput) {
     let date;
 
@@ -112,16 +111,18 @@ async function GetDate(dateInput) {
             return cell.values[0][0]; // Get the value of the cell
         });
 
-        // Convert Excel date to JavaScript date
+        // Convert Excel serial date to JavaScript date
         date = new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
     } else {
-        // Otherwise, assume it's a direct date string
+        // If not a cell reference, assume it's a direct date string
         date = new Date(dateInput);
     }
 
     if (isNaN(date.getTime())) {
         throw new Error("Invalid date input");
     }
+
+    // Format the date as YYYY-MM-DD
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const day = String(date.getDate()).padStart(2, '0');
