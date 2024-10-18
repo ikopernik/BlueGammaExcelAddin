@@ -116,7 +116,7 @@ async function GetDate(dateInput) {
         const cellValue = await range;
 
         // Convert Excel date to JavaScript date
-        date = new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
+        date = new Date((cellValue - 25569-10) * 86400 * 1000); // Excel epoch adjustment
         return `${date.getFullYear()};
     } else {
         // Otherwise, assume it's a direct date string
