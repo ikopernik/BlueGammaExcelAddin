@@ -104,19 +104,8 @@ async function GetDate(dateInput) {
     let date;
 
     // Check if dateInput is a cell reference
-    if (/^[A-Z]+\d+$/.test(dateInput)) {
-        // Assume dateInput is a cell reference, retrieve the value
-        const cellValue = await Excel.run(async (context) => {
-            const sheet = context.workbook.worksheets.getActiveWorksheet();
-            const cell = sheet.getRange(dateInput);
-            cell.load("values");
-            await context.sync();
-            return cell.values[0][0]; // Get the value of the cell
-        });
-
-        console.log("Cell Value:", cellValue);
-        // Convert Excel serial date to JavaScript date
-        date = new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
+    if (typeof dateInput === 'number') {
+        date = new Date((dateInput - 25569) * 86400 * 1000); // Excel epoch adjustment
         console.log("Converted Date:", date);
     } else {
         // If not a cell reference, assume it's a direct date string
