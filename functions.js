@@ -104,7 +104,7 @@ async function GetDate(dateInput) {
     // Check if dateInput is a cell reference
     if (/^[A-Z]+\d+$/.test(dateInput)) {
         // Assume dateInput is a cell reference, retrieve the value
-        const range = Excel.run(async (context) => {
+        const cellValue = await Excel.run(async (context) => {
             const sheet = context.workbook.worksheets.getActiveWorksheet();
             const cell = sheet.getRange(dateInput);
             cell.load("values");
@@ -112,26 +112,20 @@ async function GetDate(dateInput) {
             return cell.values[0][0]; // Get the value of the cell
         });
 
-        // Wait for the range operation to complete
-        const cellValue = await range;
-
         // Convert Excel date to JavaScript date
         date = new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
-        return `${date.getFullYear()}`;
     } else {
         // Otherwise, assume it's a direct date string
         date = new Date(dateInput);
     }
 
-    // Perform your logic with the date
     if (isNaN(date.getTime())) {
         throw new Error("Invalid date input");
     }
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const day = String(date.getDate()).padStart(2, '0');
-    // return `${year}-${month}-${day}`;
-    return `${year}`;
+    return `${year}-${month}-${day}`;
 }
 
 function formatDate(date) {
