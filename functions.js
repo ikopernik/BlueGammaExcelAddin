@@ -114,6 +114,7 @@ async function GetDate(dateInput) {
 
         // Wait for the range operation to complete
         const cellValue = await range;
+        return `${cellValue}`
 
         // Convert Excel date to JavaScript date
         date = new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
