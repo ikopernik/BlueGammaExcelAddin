@@ -112,10 +112,10 @@ async function GetDate(dateInput) {
             return cell.values[0][0]; // Get the value of the cell
         });
 
-        //console.log("Cell Value:", cellValue);
+        console.log("Cell Value:", cellValue);
         // Convert Excel serial date to JavaScript date
         date = new Date((cellValue - 25569) * 86400 * 1000); // Excel epoch adjustment
-        //console.log("Converted Date:", date);
+        console.log("Converted Date:", date);
     } else {
         // If not a cell reference, assume it's a direct date string
         date = new Date(dateInput);
@@ -129,7 +129,8 @@ async function GetDate(dateInput) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const formattedDate = `${year}-${month}-${day}`;
-    //console.log("Formatted Date:", formattedDate);
+    const day = String(date.getDate()).padStart(2, '0'); // Extract day
+    console.log("Formatted Date:", formattedDate);
     return formattedDate;
 }
 
