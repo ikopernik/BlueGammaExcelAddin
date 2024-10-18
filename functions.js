@@ -99,6 +99,8 @@ async function ForwardRate(token, index, start_date, end_date, valuation_time = 
 }
 
 async function GetDate(dateInput) {
+    console.log("dateInput:", dateInput);
+
     let date;
 
     // Check if dateInput is a cell reference
