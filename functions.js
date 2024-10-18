@@ -104,7 +104,7 @@ async function GetDate(dateInput) {
     let date;
 
     // Check if dateInput is a cell reference
-    if (typeof dateInput === 'number') {
+    if (/^[A-Z]+\d+$/.test(dateInput)) {
         date = new Date((dateInput - 25569) * 86400 * 1000); // Excel epoch adjustment
         console.log("Converted Date:", date);
     } else {
