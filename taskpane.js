@@ -3,8 +3,6 @@
  * See LICENSE in the project root for license information.
  */
 
-const WORKOS_API_KEY = "";
-const WORKOS_CLIENT_ID = "client_01HRW99Z2RAQHX8R63PNJPSZ8C"; // Replace with your actual WorkOS client ID
 const REDIRECT_URI = "https://ikopernik.github.io/callback.html"; // Replace with your callback URL
 
 Office.onReady()
@@ -38,11 +36,4 @@ async function getAuthorizationUrl() {
     } catch (error) {
         console.error('Error fetching authorization URL:', error);
     }
-}
-
-function getClientId() {
-    if (!WORKOS_CLIENT_ID) {
-        throw new Error("WORKOS_CLIENT_ID is not set");
-    }
-    return WORKOS_CLIENT_ID;
 }
