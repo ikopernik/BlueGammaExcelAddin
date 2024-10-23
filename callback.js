@@ -1,53 +1,53 @@
-import { SignJWT } from 'jose'; // Import the SignJWT function from the jose library
-import { WorkOS } from '@workos-inc/node'; // Make sure WorkOS SDK is available
+// Extract the authorization code from the URL
+async function handleAuthCallback() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const authCode = urlParams.get('code');
 
-export const workos = new WorkOS(process.env.WORKOS_API_KEY);
-
-export function getClientId() {
-    const clientId = process.env.WORKOS_CLIENT_ID;
-
-    if (!clientId) {
-        throw new Error("WORKOS_CLIENT_ID is not set");
+    if (!authCode) {
+        console.error('Authorization code not found in the callback URL.');
+        alert('Failed to authenticate. Please try again.');
+        return;
     }
 
-    return clientId;
-}
+    try {
+        // Exchange the authorization code for a JWT token
+        const tokenResponse = await fetch(`https://dev.bluegamma.io/auth/user-jwt?code=${encodeURIComponent(authCode)}`, {
+            method: 'GET'
+        });
 
-export function getJwtSecretKey() {
-    const secretKey = process.env.JWT_SECRET_KEY;
-
-    if (!secretKey) {
-        throw new Error("JWT_SECRET_KEY is not set");
-    }
-
-    return secretKey;
-}
-
-export function generateJWT(payload) {
-    return new SignJWT(payload)
-        .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-        .setIssuedAt()
-        .setExpirationTime("30d")
-        .sign(getJwtSecretKey());
-}
-
-// Function to set the token when it is retrieved
-function setJwtToken(token) {
-    jwtToken = token;
-}
-
-// Save the token in roaming settings and set the global variable
-function saveAndSetToken(token) {
-    Office.context.roamingSettings.set("jwtToken", token);
-    Office.context.roamingSettings.saveAsync(function (asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-            console.log("JWT token saved successfully.");
-            setJwtToken(token);
-        } else {
-            console.error("Failed to save JWT token:", asyncResult.error.message);
+        if (!tokenResponse.ok) {
+            throw new Error(`Failed to get JWT token. HTTP status: ${tokenResponse.status}`);
         }
 
-        // Send the token back to the parent task pane to complete the authentication process
-        Office.context.ui.messageParent(JSON.stringify({ token: firstToken }));
-    });
+        const tokenData = await tokenResponse.json();
+
+        // Assuming the response contains a 'token' field
+        const jwtToken = tokenData.token;
+
+        if (!jwtToken) {
+            throw new Error('JWT token not found in the response.');
+        }
+
+        // Save the token to Office's roaming settings so it's available across sessions
+        Office.onReady(() => {
+            Office.context.roamingSettings.set('jwtToken', jwtToken);
+            Office.context.roamingSettings.saveAsync((result) => {
+                if (result.status === Office.AsyncResultStatus.Succeeded) {
+                    console.log('JWT token saved successfully.');
+                    alert('Authentication successful! You may close this window.');
+                    // Optionally, redirect to another page or perform further actions
+                } else {
+                    console.error('Failed to save JWT token:', result.error.message);
+                    alert('Failed to save authentication token. Please try again.');
+                }
+            });
+        });
+
+    } catch (error) {
+        console.error('Error handling authentication callback:', error);
+        alert('An error occurred during authentication. Please try again.');
+    }
 }
+
+// Call the function to handle the authentication callback
+handleAuthCallback();

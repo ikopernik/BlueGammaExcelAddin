@@ -2,49 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentication Callback</title>
-    <script type="module">
-        import { workos, getClientId, generateJWT } from './callback.js'; // Ensure callback.js is available
-
-        // This script runs when the callback page is loaded
-        window.onload = async function () {
-            try {
-                // Parse the authentication response from the URL
-                const params = new URLSearchParams(window.location.search);
-                const code = params.get("code");
-                const error = params.get("error");
-
-                if (code) {
-                    // Use the code returned to us by AuthKit and authenticate the user with WorkOS
-                    const { user } = await workos.userManagement.authenticateWithCode({
-                        clientId: getClientId(),
-                        code,
-                    });
-
-                    // Generate a JWT for the authenticated user
-                    const firstToken = await generateJWT({ user });
-
-                    // Communicate the authentication result back to the task pane
-                    // Save the JWT token using Office.context.roamingSettings
-                    Office.onReady(() => {
-                        saveAndSetToken(firstToken);
-                    });
-                } else if (error) {
-                    // Handle errors
-                    Office.onReady(() => {
-                        Office.context.ui.messageParent(JSON.stringify({ error: error || "Authentication failed" }));
-                    });
-                }
-            } catch (err) {
-                console.error("Error during authentication:", err);
-                Office.onReady(() => {
-                    Office.context.ui.messageParent(JSON.stringify({ error: "Authentication error occurred" }));
-                });
-            }
-        };
-    </script>
+    <script src="callback.js" defer></script>
 </head>
 <body>
-    <p>Processing authentication...</p>
+    <h2>Authenticating, please wait...</h2>
 </body>
 </html>
