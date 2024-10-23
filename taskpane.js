@@ -3,6 +3,10 @@
  * See LICENSE in the project root for license information.
  */
 
+const WORKOS_API_KEY = "sk_test_a2V5XzAxSFJXOTlZTVhDOThWUTRBRFA5V0FURjhOLDM4NjlqWlJZbjJPS0J1bkZ5MkpDeEtiakU";
+const WORKOS_CLIENT_ID = "client_01HRW99Z2RAQHX8R63PNJPSZ8C"; // Replace with your actual WorkOS client ID
+const REDIRECT_URI = "https://ikopernik.github.io/callback.html"; // Replace with your callback URL
+
 Office.onReady()
 .then(function() {
   document.getElementById("sideload-msg").style.display = "none";
@@ -10,24 +14,35 @@ Office.onReady()
   document.getElementById("run").onclick = run;       
 });
 
-function run() {
+async function run() {
   try {
-    Excel.run(function (context) {
-      /**
-       * Insert your Excel code here
-       */
-      const range = context.workbook.getSelectedRange();
-
-      // Read the range address
-      range.load("address");
-
-      // Update the fill color
-      range.format.fill.color = "yellow";
-
-      context.sync();
-      //console.log(`The range address was ${range.address}.`);
-    });
+      const authorizationUrl = await getAuthorizationUrl();
   } catch (error) {
     console.error(error);
   }
+}
+
+
+async function getAuthorizationUrl() {
+    const redirectUri = encodeURIComponent('https://ikopernik.github.io/BlueGammaExcelAddin/callback.html');
+    const endpoint = `https://dev.bluegamma.io/auth/url?redirectUri=${redirectUri}`;
+
+    try {
+        //const response = await fetch(endpoint, { mode: 'no-cors' });
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.url; // Assuming the response contains an `url` field
+    } catch (error) {
+        console.error('Error fetching authorization URL:', error);
+    }
+}
+
+function getClientId() {
+    if (!WORKOS_CLIENT_ID) {
+        throw new Error("WORKOS_CLIENT_ID is not set");
+    }
+    return WORKOS_CLIENT_ID;
 }

@@ -47,69 +47,70 @@
     <Hosts>
       <Host xsi:type="Workbook">
 		  <Runtimes>
-			  <Runtime resid="Contoso.Taskpane.Url" lifetime="long" />
-		  </Runtimes>
+			  <Runtime resid="BlueG.Taskpane.Url" lifetime="long" />
+              <Runtime resid="BlueG.CustomFunctions.Url" lifetime="long" />
+          </Runtimes>
 		  <AllFormFactors>
 			  <ExtensionPoint xsi:type="CustomFunctions">
 				  <Script>
-					  <SourceLocation resid="Contoso.Functions.Url"/>
+					  <SourceLocation resid="BlueG.Functions.Url"/>
 				  </Script>
 				  <Page>
-					  <SourceLocation resid="Contoso.Taskpane.Url"/>
+					  <SourceLocation resid="BlueG.Taskpane.Url"/>
 				  </Page>
 				  <Metadata>
-					  <SourceLocation resid="Contoso.Metadata.Url"/>
+					  <SourceLocation resid="BlueG.Metadata.Url"/>
 				  </Metadata>
 				  <Namespace resid="Functions.Namespace"/>
 			  </ExtensionPoint>
 		  </AllFormFactors>
         <DesktopFormFactor>
           <GetStarted>
-            <Title resid="Contoso.GetStarted.Title"/>
+            <Title resid="BlueG.GetStarted.Title"/>
 
-            <Description resid="Contoso.GetStarted.Description"/>
+            <Description resid="BlueG.GetStarted.Description"/>
 
-            <LearnMoreUrl resid="Contoso.GetStarted.LearnMoreUrl"/>
+            <LearnMoreUrl resid="BlueG.GetStarted.LearnMoreUrl"/>
           </GetStarted>
-          <FunctionFile resid="Contoso.Functions.Url" />
+          <FunctionFile resid="BlueG.Functions.Url" />
 
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
-              <Group id="Contoso.Group1">
-                <Label resid="Contoso.Group1Label" />
+              <Group id="BlueG.Group1">
+                <Label resid="BlueG.Group1Label" />
                 <Icon>
-                  <bt:Image size="16" resid="Contoso.tpicon_16x16" />
-                  <bt:Image size="32" resid="Contoso.tpicon_32x32" />
-                  <bt:Image size="80" resid="Contoso.tpicon_80x80" />
+                  <bt:Image size="16" resid="BlueG.tpicon_16x16" />
+                  <bt:Image size="32" resid="BlueG.tpicon_32x32" />
+                  <bt:Image size="80" resid="BlueG.tpicon_80x80" />
                 </Icon>
 
-                <Control xsi:type="Button" id="Contoso.TaskpaneButton">
-                  <Label resid="Contoso.TaskpaneButton.Label" />
+                <Control xsi:type="Button" id="BlueG.TaskpaneButton">
+                  <Label resid="BlueG.TaskpaneButton.Label" />
                   <Supertip>
-                    <Title resid="Contoso.TaskpaneButton.Label" />
-                    <Description resid="Contoso.TaskpaneButton.Tooltip" />
+                    <Title resid="BlueG.TaskpaneButton.Label" />
+                    <Description resid="BlueG.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Contoso.tpicon_16x16" />
-                    <bt:Image size="32" resid="Contoso.tpicon_32x32" />
-                    <bt:Image size="80" resid="Contoso.tpicon_80x80" />
+                    <bt:Image size="16" resid="BlueG.tpicon_16x16" />
+                    <bt:Image size="32" resid="BlueG.tpicon_32x32" />
+                    <bt:Image size="80" resid="BlueG.tpicon_80x80" />
                   </Icon>
 
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Contoso.Taskpane.Url" />
+                    <SourceLocation resid="BlueG.Taskpane.Url" />
                   </Action>
                 </Control>
-                <Control xsi:type="Button" id="Contoso.FunctionButton">
-                  <Label resid="Contoso.FunctionButton.Label" />
+                <Control xsi:type="Button" id="BlueG.FunctionButton">
+                  <Label resid="BlueG.FunctionButton.Label" />
                   <Supertip>
-                    <Title resid="Contoso.FunctionButton.Label" />
-                    <Description resid="Contoso.FunctionButton.Tooltip" />
+                    <Title resid="BlueG.FunctionButton.Label" />
+                    <Description resid="BlueG.FunctionButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Contoso.tpicon_16x16" />
-                    <bt:Image size="32" resid="Contoso.tpicon_32x32" />
-                    <bt:Image size="80" resid="Contoso.tpicon_80x80" />
+                    <bt:Image size="16" resid="BlueG.tpicon_16x16" />
+                    <bt:Image size="32" resid="BlueG.tpicon_32x32" />
+                    <bt:Image size="80" resid="BlueG.tpicon_80x80" />
                   </Icon>
                   <Action xsi:type="ExecuteFunction">
                     <FunctionName>sampleFunction</FunctionName>
@@ -124,28 +125,28 @@
     
     <Resources>
       <bt:Images>
-        <bt:Image id="Contoso.tpicon_16x16" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button16x16.png" />
-        <bt:Image id="Contoso.tpicon_32x32" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button32x32.png" />
-        <bt:Image id="Contoso.tpicon_80x80" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button80x80.png" />
+        <bt:Image id="BlueG.tpicon_16x16" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button16x16.png" />
+        <bt:Image id="BlueG.tpicon_32x32" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button32x32.png" />
+        <bt:Image id="BlueG.tpicon_80x80" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button80x80.png" />
       </bt:Images>
       <bt:Urls>
-		<bt:Url id="Contoso.Functions.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.js"/>
-		<bt:Url id="Contoso.Metadata.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.json"/>
-        <bt:Url id="Contoso.DesktopFunctionFile.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.html" />
-        <bt:Url id="Contoso.Taskpane.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/taskpane.html" />
-        <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
+		<bt:Url id="BlueG.Functions.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.js"/>
+		<bt:Url id="BlueG.Metadata.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.json"/>
+        <bt:Url id="BlueG.CustomFunctions.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.html" />
+        <bt:Url id="BlueG.Taskpane.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/taskpane.html" />
+        <bt:Url id="BlueG.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
       </bt:Urls>
       <bt:ShortStrings>
 		<bt:String id="Functions.Namespace" DefaultValue="BlueGamma" />
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
-				<bt:String id="Contoso.FunctionButton.Label" DefaultValue="Run Function" />
-        <bt:String id="Contoso.Group1Label" DefaultValue="BlueGamma" />
-        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
+        <bt:String id="BlueG.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
+				<bt:String id="BlueG.FunctionButton.Label" DefaultValue="Run Function" />
+        <bt:String id="BlueG.Group1Label" DefaultValue="BlueGamma" />
+        <bt:String id="BlueG.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="Contoso.FunctionButton.Tooltip" DefaultValue="Click to run a sample function." />
-        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
-        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
+        <bt:String id="BlueG.FunctionButton.Tooltip" DefaultValue="Click to run a sample function." />
+        <bt:String id="BlueG.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="BlueG.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
