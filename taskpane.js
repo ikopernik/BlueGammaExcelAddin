@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-const WORKOS_API_KEY = "sk_test_a2V5XzAxSFJXOTlZTVhDOThWUTRBRFA5V0FURjhOLDM4NjlqWlJZbjJPS0J1bkZ5MkpDeEtiakU";
+const WORKOS_API_KEY = "";
 const WORKOS_CLIENT_ID = "client_01HRW99Z2RAQHX8R63PNJPSZ8C"; // Replace with your actual WorkOS client ID
 const REDIRECT_URI = "https://ikopernik.github.io/callback.html"; // Replace with your callback URL
 
