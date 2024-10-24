@@ -24,8 +24,7 @@ function authenticateUser() {
                 // Check the origin of the message for security
                 if (event.origin === "https://ikopernik.github.io") { // Replace with your actual domain
                     if (event.data.type === "AUTH_SUCCESS") {
-                        console.log("JWT Token received:", event.data.authorizationCode);
-                        console.log("authorizationCode", authorizationCode);
+                        console.log("authorizationCode", event.data.authorizationCode);
 
                         // Save the token
                         localStorage.setItem("jwtToken", authorizationCode);
