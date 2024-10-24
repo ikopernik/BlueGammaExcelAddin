@@ -41,7 +41,12 @@ function authenticateUser() {
                             console.log("Received JWT Token:", jwtToken);
 
                             // Store the JWT token for future use
-                            localStorage.setItem("jwtToken", jwtToken);
+                            //localStorage.setItem("jwtToken", jwtToken);
+
+                            storeToken(jwtToken);
+
+                            const retrievedToken = getToken();
+                            console.log("retrieved JWT:", retrievedToken);
 
                             // Update UI to show authenticated status
                             document.getElementById("authStatus").textContent = "Authenticated";
@@ -77,4 +82,17 @@ function checkAuthenticationStatus() {
         document.getElementById("authStatus").textContent = "Not authenticated";
         document.getElementById("loginButton").style.display = "block";
     }
+}
+
+// Initialize SecureLS
+const ls = new SecureLS({ encodingType: 'aes' });
+
+// Storing the JWT token
+function storeToken(token) {
+    ls.set('jwtToken', token);
+}
+
+// Retrieving the JWT token
+function getToken() {
+    return ls.get('jwtToken');
 }
