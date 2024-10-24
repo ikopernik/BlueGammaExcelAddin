@@ -24,7 +24,7 @@ window.onload = function () {
 // Function to get the JWT token from cookies
 function getCookie(name) {
     const value = `; ${document.cookie}`;
-    console.log("Callback is called");
+    console.log(value);
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(";").shift();
     return null;
