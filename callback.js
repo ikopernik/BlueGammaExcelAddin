@@ -1,5 +1,6 @@
 window.onload = function () {
     console.log("Callback is called");
+    console.log(window.location);
 
     const jwtToken = getCookie("token");
 
