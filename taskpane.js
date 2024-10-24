@@ -3,13 +3,9 @@ Office.onReady().then(function() {
     document.getElementById("loginButton").addEventListener("click", authenticateUser);
 
     console.log("Office is ready.");
-    console.log("Office.context:", Office.context);
-    console.log("Office.context.roamingSettings:", Office.context.roamingSettings);
-    Office.context.roamingSettings.set("jwtToken", jwtToken);
+    const jwtToken = localStorage.getItem("jwtToken");
     // Check if the user is already authenticated on load
     checkAuthenticationStatus();
-
-    Office.addin.onMessage = handleDialogMessage;
 });
 
 function authenticateUser() {
@@ -30,9 +26,8 @@ function authenticateUser() {
                 dialog.close();
 
                 if (jwtToken) {
-                    // Save the token to Office Roaming Settings
-                    Office.context.roamingSettings.set("jwtToken", jwtToken);
-                    Office.context.roamingSettings.saveAsync();
+                    // Save the token
+                    localStorage.setItem("jwtToken", jwtToken);
 
                     // Update UI to show authenticated status
                     document.getElementById("authStatus").textContent = "Authenticated";
@@ -51,21 +46,14 @@ function authenticateUser() {
 }
 
 function checkAuthenticationStatus() {
-    if (Office.context && Office.context.roamingSettings) {
+    // Retrieve the JWT token from Office Roaming Settings
+    const jwtToken = localStorage.getItem("jwtToken");
 
-        // Retrieve the JWT token from Office Roaming Settings
-        const jwtToken = Office.context.roamingSettings.get("jwtToken");
-
-        if (jwtToken) {
-            document.getElementById("authStatus").textContent = "Authenticated";
-            document.getElementById("loginButton").style.display = "none";
-        } else {
-            document.getElementById("authStatus").textContent = "Not authenticated";
-            document.getElementById("loginButton").style.display = "block";
-        }
-    }
-    else
-    {
-        console.error("Office.context.roamingSettings is still undefined.");
+    if (jwtToken) {
+        document.getElementById("authStatus").textContent = "Authenticated";
+        document.getElementById("loginButton").style.display = "none";
+    } else {
+        document.getElementById("authStatus").textContent = "Not authenticated";
+        document.getElementById("loginButton").style.display = "block";
     }
 }
