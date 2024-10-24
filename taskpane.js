@@ -20,7 +20,7 @@ function authenticateUser() {
             const dialog = result.value;
 
             // Add an event listener for messages from the child window
-            window.addEventListener("message", function (event) {
+            window.addEventListener("message", async function (event) {
                 // Check the origin of the message for security
                 if (event.origin === "https://ikopernik.github.io") { // Replace with your actual domain
                     if (event.data.type === "AUTH_SUCCESS") {
