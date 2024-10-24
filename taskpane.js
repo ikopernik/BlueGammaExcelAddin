@@ -1,39 +1,71 @@
-/*
- * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
- * See LICENSE in the project root for license information.
- */
+Office.onReady().then(function() {
+    // Ensure the DOM is loaded before setting up the button click handler
+    document.getElementById("loginButton").addEventListener("click", authenticateUser);
 
-const REDIRECT_URI = "https://ikopernik.github.io/callback.html"; // Replace with your callback URL
+    console.log("Office is ready.");
+    console.log("Office.context:", Office.context);
+    console.log("Office.context.roamingSettings:", Office.context.roamingSettings);
+    Office.context.roamingSettings.set("jwtToken", jwtToken);
+    // Check if the user is already authenticated on load
+    checkAuthenticationStatus();
 
-Office.onReady()
-.then(function() {
-  document.getElementById("sideload-msg").style.display = "none";
-  document.getElementById("app-body").style.display = "flex";
-  document.getElementById("run").onclick = run;       
+    Office.addin.onMessage = handleDialogMessage;
 });
 
-async function run() {
-  try {
-      const authorizationUrl = await getAuthorizationUrl();
-  } catch (error) {
-    console.error(error);
-  }
+function authenticateUser() {
+    // URL for the authentication endpoint
+    const authUri = "https://dev.bluegamma.io/api/auth/addin?redirectUri=https://ikopernik.github.io/BlueGammaExcelAddin/callback.html";
+
+    // Use the Office Dialog API to open the authentication page
+    Office.context.ui.displayDialogAsync(authUri, { height: 60, width: 30 }, (result) => {
+        if (result.status === Office.AsyncResultStatus.Failed) {
+            console.error("Failed to open the dialog:", result.error.message);
+        } else {
+            const dialog = result.value;
+
+            // Handle messages sent from the dialog
+            dialog.addEventHandler(Office.EventType.DialogMessageReceived, (messageResult) => {
+                console.log("Message in taskpane received");
+                const jwtToken = messageResult.message;
+                dialog.close();
+
+                if (jwtToken) {
+                    // Save the token to Office Roaming Settings
+                    Office.context.roamingSettings.set("jwtToken", jwtToken);
+                    Office.context.roamingSettings.saveAsync();
+
+                    // Update UI to show authenticated status
+                    document.getElementById("authStatus").textContent = "Authenticated";
+                    document.getElementById("loginButton").style.display = "none";
+                } else {
+                    document.getElementById("authStatus").textContent = "Authentication failed";
+                }
+            });
+
+            // Handle the dialog being closed
+            dialog.addEventHandler(Office.EventType.DialogEventReceived, () => {
+                console.log("Dialog was closed by the user");
+            });
+        }
+    });
 }
 
+function checkAuthenticationStatus() {
+    if (Office.context && Office.context.roamingSettings) {
 
-async function getAuthorizationUrl() {
-    const redirectUri = encodeURIComponent('https://ikopernik.github.io/BlueGammaExcelAddin/callback.html');
-    const endpoint = `https://dev.bluegamma.io/auth/url?redirectUri=${redirectUri}`;
+        // Retrieve the JWT token from Office Roaming Settings
+        const jwtToken = Office.context.roamingSettings.get("jwtToken");
 
-    try {
-        //const response = await fetch(endpoint, { mode: 'no-cors' });
-        const response = await fetch(endpoint);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        if (jwtToken) {
+            document.getElementById("authStatus").textContent = "Authenticated";
+            document.getElementById("loginButton").style.display = "none";
+        } else {
+            document.getElementById("authStatus").textContent = "Not authenticated";
+            document.getElementById("loginButton").style.display = "block";
         }
-        const data = await response.json();
-        return data.url; // Assuming the response contains an `url` field
-    } catch (error) {
-        console.error('Error fetching authorization URL:', error);
+    }
+    else
+    {
+        console.error("Office.context.roamingSettings is still undefined.");
     }
 }
