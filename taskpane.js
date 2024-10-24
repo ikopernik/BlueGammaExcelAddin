@@ -27,7 +27,7 @@ function authenticateUser() {
                         console.log("authorizationCode", event.data.authorizationCode);
 
                         // Save the token
-                        localStorage.setItem("jwtToken", authorizationCode);
+                        //localStorage.setItem("jwtToken", event.data.authorizationCode);
 
                         // Update UI to show authenticated status
                         document.getElementById("authStatus").textContent = "Authenticated";
