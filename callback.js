@@ -3,14 +3,16 @@ window.onload = function () {
     console.log(window.location);
     console.log(document.cookie);
 
-    const jwtToken = getCookie("token");
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
 
-    console.log(jwtToken);
+    const authorizationCode = params.get('code');
+    console.log("Authorization Code:", authorizationCode);
 
-    if (jwtToken) {
+    if (authorizationCode) {
         // If the token is found, send it to the parent page (the task pane)
         if (window.opener) {
-            window.opener.postMessage({ type: "AUTH_SUCCESS", token: jwtToken }, "*");
+            window.opener.postMessage({ type: "AUTH_SUCCESS", authorizationCode: authorizationCode }, "*");
         }
     } else {
         // If the token is not found, send an empty message to indicate failure
@@ -22,12 +24,3 @@ window.onload = function () {
     // Optionally, close the child window after sending the message
     // window.close();
 };
-
-// Function to get the JWT token from cookies
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    console.log(value);
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-    return null;
-}
