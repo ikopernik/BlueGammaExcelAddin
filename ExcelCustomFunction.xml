@@ -132,12 +132,13 @@
 		<bt:Url id="BlueG.Metadata.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.json"/>
         <bt:Url id="BlueG.CustomFunctions.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.html" />
         <bt:Url id="BlueG.Taskpane.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/taskpane.html" />
+		<bt:Url id="BlueG.Callback.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/callback.html"/>
         <bt:Url id="BlueG.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
       </bt:Urls>
       <bt:ShortStrings>
 		<bt:String id="Functions.Namespace" DefaultValue="BlueGamma" />
         <bt:String id="BlueG.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
-				<bt:String id="BlueG.FunctionButton.Label" DefaultValue="Run Function" />
+		<bt:String id="BlueG.FunctionButton.Label" DefaultValue="Run Function" />
         <bt:String id="BlueG.Group1Label" DefaultValue="BlueGamma" />
         <bt:String id="BlueG.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
       </bt:ShortStrings>
