@@ -29,9 +29,28 @@ function authenticateUser() {
                         // Save the token
                         //localStorage.setItem("jwtToken", event.data.authorizationCode);
 
-                        // Update UI to show authenticated status
-                        document.getElementById("authStatus").textContent = "Authenticated";
-                        document.getElementById("loginButton").style.display = "none";
+                        try {
+                            // Fetch the JWT token using the authentication code
+                            const response = await fetch(`https://dev.bluegamma.io/api/auth/jwt?code=${encodeURIComponent(authCode)}`);
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+
+                            const data = await response.json();
+                            const jwtToken = data.jwt; // Assuming the response contains a 'jwt' field
+                            console.log("Received JWT Token:", jwtToken);
+
+                            // Store the JWT token for future use
+                            localStorage.setItem("jwtToken", jwtToken);
+
+                            // Update UI to show authenticated status
+                            document.getElementById("authStatus").textContent = "Authenticated";
+                            document.getElementById("loginButton").style.display = "none";
+                        } catch (error) {
+                            console.error("Error fetching JWT token:", error);
+                            document.getElementById("authStatus").textContent = "Error fetching JWT token";
+
+                        }
                     } else if (event.data.type === "AUTH_FAILURE") {
                         console.log("Authentication failed.");
                         document.getElementById("authStatus").textContent = "Authentication failed";

@@ -22,5 +22,5 @@ window.onload = function () {
     }
 
     // Optionally, close the child window after sending the message
-    // window.close();
+    window.close();
 };
