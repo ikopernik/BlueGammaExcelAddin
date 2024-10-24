@@ -19,21 +19,23 @@ function authenticateUser() {
         } else {
             const dialog = result.value;
 
-            // Handle messages sent from the dialog
-            dialog.addEventHandler(Office.EventType.DialogMessageReceived, (messageResult) => {
-                console.log("Message in taskpane received");
-                const jwtToken = messageResult.message;
-                dialog.close();
+            // Add an event listener for messages from the child window
+            window.addEventListener("message", function (event) {
+                // Check the origin of the message for security
+                if (event.origin === "https://ikopernik.github.io") { // Replace with your actual domain
+                    if (event.data.type === "AUTH_SUCCESS") {
+                        console.log("JWT Token received:", event.data.token);
 
-                if (jwtToken) {
-                    // Save the token
-                    localStorage.setItem("jwtToken", jwtToken);
+                        // Save the token
+                        localStorage.setItem("jwtToken", jwtToken);
 
-                    // Update UI to show authenticated status
-                    document.getElementById("authStatus").textContent = "Authenticated";
-                    document.getElementById("loginButton").style.display = "none";
-                } else {
-                    document.getElementById("authStatus").textContent = "Authentication failed";
+                        // Update UI to show authenticated status
+                        document.getElementById("authStatus").textContent = "Authenticated";
+                        document.getElementById("loginButton").style.display = "none";
+                    } else if (event.data.type === "AUTH_FAILURE") {
+                        console.log("Authentication failed.");
+                        document.getElementById("authStatus").textContent = "Authentication failed";
+                    }
                 }
             });
 

@@ -11,10 +11,17 @@ window.onload = function () {
     const jwtToken = getCookie("token");
 
     if (jwtToken) {
-        // Send the JWT token to the parent page (the task pane)
-        Office.context.ui.messageParent(jwtToken);
+        // If the token is found, send it to the parent page (the task pane)
+        if (window.opener) {
+            window.opener.postMessage({ type: "AUTH_SUCCESS", token: jwtToken }, "*");
+        }
     } else {
-        // Send an empty message to indicate failure
-        Office.context.ui.messageParent("");
+        // If the token is not found, send an empty message to indicate failure
+        if (window.opener) {
+            window.opener.postMessage({ type: "AUTH_FAILURE" }, "*");
+        }
     }
+
+    // Optionally, close the child window after sending the message
+    window.close();
 };
