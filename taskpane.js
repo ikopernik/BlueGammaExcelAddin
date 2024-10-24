@@ -31,7 +31,7 @@ function authenticateUser() {
 
                         try {
                             // Fetch the JWT token using the authentication code
-                            const response = await fetch(`https://dev.bluegamma.io/api/auth/jwt?code=${encodeURIComponent(authCode)}`);
+                            const response = await fetch(`https://dev.bluegamma.io/api/auth/jwt?code=${encodeURIComponent(event.data.authorizationCode)}`);
                             if (!response.ok) {
                                 throw new Error(`HTTP error! status: ${response.status}`);
                             }
