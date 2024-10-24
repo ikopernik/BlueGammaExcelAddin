@@ -37,7 +37,7 @@ function authenticateUser() {
                             }
 
                             const data = await response.json();
-                            const jwtToken = data.jwt; // Assuming the response contains a 'jwt' field
+                            const jwtToken = data.token;
                             console.log("Received JWT Token:", jwtToken);
 
                             // Store the JWT token for future use
