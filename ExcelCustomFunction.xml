@@ -46,7 +46,6 @@
       <Host xsi:type="Workbook">
 		  <Runtimes>
 			  <Runtime resid="BlueG.Taskpane.Url" lifetime="long" />
-              <Runtime resid="BlueG.CustomFunctions.Url" lifetime="long" />
           </Runtimes>
 		  <AllFormFactors>
 			  <ExtensionPoint xsi:type="CustomFunctions">
@@ -132,7 +131,6 @@
 		<bt:Url id="BlueG.Metadata.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.json"/>
         <bt:Url id="BlueG.CustomFunctions.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/functions.html" />
         <bt:Url id="BlueG.Taskpane.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/taskpane.html" />
-		<bt:Url id="BlueG.Callback.Url" DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/callback.html"/>
         <bt:Url id="BlueG.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
       </bt:Urls>
       <bt:ShortStrings>
