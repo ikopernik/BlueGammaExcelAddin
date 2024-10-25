@@ -28,7 +28,7 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
     const url = baseUrl + "swap_rate?" + params.toString();
     
     try {
-        const token = "IQzJm6dCYY2qCWdU68Y1J51pttmaAy65aBHHKzPn"; // localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("jwtToken");
         console.log("token", token);
 
         const response = await fetch(url, {
@@ -78,7 +78,7 @@ async function ForwardRate(index, start_date, end_date, valuation_time = "") {
     const url = baseUrl + "forward_rate?" + params.toString();
 
     try {
-        const token = "IQzJm6dCYY2qCWdU68Y1J51pttmaAy65aBHHKzPn"; //localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("jwtToken");
         console.log("token", token);
 
         const response = await fetch(url, {

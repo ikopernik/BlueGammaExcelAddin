@@ -1,4 +1,12 @@
-Office.onReady().then(function() {
+let isInitialized = false;
+
+Office.onReady().then(function () {
+    // Check if the initialization has already been done
+    if (isInitialized) {
+        return; // If already initialized, exit the function
+    }
+    isInitialized = true;
+
     // Ensure the DOM is loaded before setting up the button click handler
     document.getElementById("loginButton").addEventListener("click", authenticateUser);
 
