@@ -12,7 +12,8 @@ function authenticateUser() {
     // URL for the authentication endpoint
     const authUri = "https://dev.bluegamma.io/api/auth/addin?redirectUri=https://ikopernik.github.io/BlueGammaExcelAddin/callback.html";
 
-    window.location.href = authUri;
+    // window.location.href = authUri;
+    window.open(authUri, "_blank");
 
     // Add an event listener for messages from the child window (callback.html)
     window.addEventListener("message", async function (event) {
