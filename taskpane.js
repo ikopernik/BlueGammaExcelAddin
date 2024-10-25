@@ -58,6 +58,7 @@ function authenticateUser() {
 function checkAuthenticationStatus() {
     // Retrieve the JWT token from Office Roaming Settings
     const jwtToken = localStorage.getItem("jwtToken");
+    console.log("checkAuthenticationStatus token", jwtToken);
 
     if (jwtToken) {
         document.getElementById("authStatus").textContent = "Authenticated";
