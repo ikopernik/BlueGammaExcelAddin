@@ -37,8 +37,8 @@ function authenticateUser() {
                     localStorage.setItem("jwtToken", jwtToken);
 
                     // Retrieve the token from storage to confirm it was saved correctly
-                    const retrievedToken = localStorage.getItem("jwtToken");
-                    console.log("retrieved JWT:", retrievedToken);
+                    //const retrievedToken = localStorage.getItem("jwtToken");
+                    //console.log("retrieved JWT:", retrievedToken);
 
                     // Update UI to show authenticated status
                     document.getElementById("authStatus").textContent = "Authenticated";

@@ -3,7 +3,6 @@
 /**
  * Get swap rate
  * @customfunction
- * @param {string} token Token
  * @param {string} index Index
  * @param {string} start_date Start date
  * @param {string} maturity_date Maturity date
@@ -11,7 +10,7 @@
  * @param {string} valuation_time Valuation time
  * @returns {string} Swap rate
  */
-async function SwapRate(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
+async function SwapRate(index, start_date, maturity_date, payment_frequency, valuation_time = "") {
     start_date = await GetDate(start_date);
     maturity_date = await GetDate(maturity_date);
 
@@ -27,6 +26,8 @@ async function SwapRate(token, index, start_date, maturity_date, payment_frequen
     }
 
     const url = baseUrl + "swap_rate?" + params.toString();
+    const token = localStorage.getItem("jwtToken");
+    console.log("token", token);
 
     try {
         const response = await fetch(url, {
@@ -53,14 +54,13 @@ async function SwapRate(token, index, start_date, maturity_date, payment_frequen
 /**
  * Get forward rate
  * @customfunction
- * @param {string} token Token
  * @param {string} index Index
  * @param {string} start_date Start date
  * @param {string} end_date End date
  * @param {string} valuation_time Valuation time
  * @returns {string} Forward rate
  */
-async function ForwardRate(token, index, start_date, end_date, valuation_time = "") {
+async function ForwardRate(index, start_date, end_date, valuation_time = "") {
     start_date = await GetDate(start_date);
     end_date = await GetDate(end_date);
 
@@ -75,6 +75,8 @@ async function ForwardRate(token, index, start_date, end_date, valuation_time = 
     }
 
     const url = baseUrl + "forward_rate?" + params.toString();
+    const token = localStorage.getItem("jwtToken");
+    console.log("token", token);
 
     try {
         const response = await fetch(url, {
@@ -134,4 +136,3 @@ function formatDate(date) {
 
 CustomFunctions.associate("SwapRate", SwapRate);
 CustomFunctions.associate("ForwardRate", ForwardRate);
-CustomFunctions.associate("GetDate", GetDate);
