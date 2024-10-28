@@ -28,7 +28,7 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
     const url = baseUrl + "swap_rate?" + params.toString();
     
     try {
-        const token = localStorage.getItem("jwtToken");
+        // const token = localStorage.getItem("jwtToken");
         console.log("token", token);
 
         const response = await fetch(url, {
@@ -37,7 +37,8 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
                 "Authorization": `Bearer ${token}`,
                 "content-type": "application/json",
                 "sec-fetch-site": "cross-site",
-                "sec-fetch-mode": "cors"
+                "sec-fetch-mode": "cors",
+                "referer": "https://ikopernik.github.io/BlueGammaExcelAddin"
             }
         });
 
