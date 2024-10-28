@@ -28,17 +28,13 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
     const url = baseUrl + "swap_rate?" + params.toString();
     
     try {
-        // const token = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("jwtToken");
         console.log("token", token);
 
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                "Authorization": `Bearer ${token}`,
-                "content-type": "application/json",
-                "sec-fetch-site": "cross-site",
-                "sec-fetch-mode": "cors",
-                "referer": "https://ikopernik.github.io/BlueGammaExcelAddin"
+                "Authorization": `Bearer ${token}`
             }
         });
 
@@ -86,7 +82,7 @@ async function ForwardRate(index, start_date, end_date, valuation_time = "") {
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'X-Api-Key': token
+                "Authorization": `Bearer ${token}`
             }
         });
 
