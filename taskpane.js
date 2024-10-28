@@ -1,6 +1,6 @@
 let isInitialized = false;
 
-Office.onReady().then(function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Check if the initialization has already been done
     if (isInitialized) {
         return; // If already initialized, exit the function

@@ -1,4 +1,4 @@
-﻿const baseUrl = "https://api.bluegamma.io/v1/";
+﻿const baseUrl = "https://6v51jtul4e.execute-api.eu-west-2.amazonaws.com/v1/";
 
 /**
  * Get swap rate
@@ -34,7 +34,10 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'X-Api-Key': token
+                "Authorization": `Bearer ${token}`,
+                "content-type": "application/json",
+                "sec-fetch-site": "cross-site",
+                "sec-fetch-mode": "cors"
             }
         });
 
@@ -47,8 +50,6 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
         return data.swap_rate;
     } catch (error) {
         console.error('Error fetching the swap rate:', error);
-        // Optionally, you can return an error value or rethrow the error
-        throw error;
     }
 }
 
@@ -97,8 +98,6 @@ async function ForwardRate(index, start_date, end_date, valuation_time = "") {
         return data.forward_rate;
     } catch (error) {
         console.error('Error fetching the forward rate:', error);
-        // Optionally, you can return an error value or rethrow the error
-        throw error;
     }
 }
 
