@@ -21,13 +21,13 @@
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
   <IconUrl DefaultValue="https://ikopernik.github.io/BlueGammaExcelAddin/Images/Button32x32.png" />
 
-  <SupportUrl DefaultValue="http://www.contoso.com" />
+  <SupportUrl DefaultValue="mailto:support@bluegamma.io" />
   <!-- Domains that will be allowed when navigating. For example, if you use ShowTaskpane and then have an href link, navigation will only be allowed if the domain is on this list. -->
   <AppDomains>
-        <AppDomain>https://dev.bluegamma.io</AppDomain>
-		<AppDomain>https://api.bluegamma.io</AppDomain>
+    <AppDomain>https://dev.bluegamma.io</AppDomain>
+    <AppDomain>https://api.bluegamma.io</AppDomain>
+    <AppDomain>https://6v51jtul4e.execute-api.eu-west-2.amazonaws.com</AppDomain>
   </AppDomains>
-  
 
   <Hosts>
     <Host Name="Workbook" />
@@ -99,21 +99,6 @@
                     <SourceLocation resid="BlueG.Taskpane.Url" />
                   </Action>
                 </Control>
-                <Control xsi:type="Button" id="BlueG.FunctionButton">
-                  <Label resid="BlueG.FunctionButton.Label" />
-                  <Supertip>
-                    <Title resid="BlueG.FunctionButton.Label" />
-                    <Description resid="BlueG.FunctionButton.Tooltip" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="BlueG.tpicon_16x16" />
-                    <bt:Image size="32" resid="BlueG.tpicon_32x32" />
-                    <bt:Image size="80" resid="BlueG.tpicon_80x80" />
-                  </Icon>
-                  <Action xsi:type="ExecuteFunction">
-                    <FunctionName>sampleFunction</FunctionName>
-                  </Action>
-                </Control>
               </Group>
             </OfficeTab>
           </ExtensionPoint>
@@ -136,15 +121,13 @@
       </bt:Urls>
       <bt:ShortStrings>
 		<bt:String id="Functions.Namespace" DefaultValue="BlueGamma" />
-        <bt:String id="BlueG.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
-		<bt:String id="BlueG.FunctionButton.Label" DefaultValue="Run Function" />
+        <bt:String id="BlueG.TaskpaneButton.Label" DefaultValue="Connect to BlueGamma" />
         <bt:String id="BlueG.Group1Label" DefaultValue="BlueGamma" />
-        <bt:String id="BlueG.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
+        <bt:String id="BlueG.GetStarted.Title" DefaultValue="BlueGamma add-in" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="BlueG.FunctionButton.Tooltip" DefaultValue="Click to run a sample function." />
-        <bt:String id="BlueG.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
-        <bt:String id="BlueG.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
+        <bt:String id="BlueG.TaskpaneButton.Tooltip" DefaultValue="Click to connect to BlueGamma" />
+        <bt:String id="BlueG.GetStarted.Description" DefaultValue="BlueGamma add-in loaded succesfully. Go to the HOME tab and click the 'Connect to BlueGamma' button to get started." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
