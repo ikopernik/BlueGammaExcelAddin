@@ -1,6 +1,6 @@
 let isInitialized = false;
 
-Office.onReady().then(function () {
+Office.onReady().then(async function () {
     // Check if the initialization has already been done
     if (isInitialized) {
         return; // If already initialized, exit the function
@@ -8,12 +8,12 @@ Office.onReady().then(function () {
     isInitialized = true;
 
     // Ensure the DOM is loaded before setting up the button click handler
-    document.getElementById("btn login-btn").addEventListener("click", authenticateUser);
+    document.getElementById("loginButton").addEventListener("click", authenticateUser);
 
     console.log("Office is ready.");
     const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
     // Check if the user is already authenticated on load
-    checkAuthenticationStatus();
+    await checkAuthenticationStatus();
 });
 
 function authenticateUser() {
@@ -50,18 +50,18 @@ function authenticateUser() {
                     await UpdateControlsToAuthenticated();
                 } catch (error) {
                     console.error("Error fetching JWT token:", error);
-                    document.getElementById("auth-status").textContent = "Error fetching JWT token";
+                    document.getElementById("authStatus").textContent = "Error fetching JWT token";
                 }
 
             } else if (event.data.type === "AUTH_FAILURE") {
                 console.log("Authentication failed.");
-                document.getElementById("auth-status").textContent = "Authentication failed";
+                document.getElementById("authStatus").textContent = "Authentication failed";
             }
         }
     });
 }
 
-function checkAuthenticationStatus() {
+async function checkAuthenticationStatus() {
     // Retrieve the JWT token from Office Roaming Settings
     const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
     const isTokenValid = OfficeRuntime.storage.setItem(isTokenValidName);
@@ -91,13 +91,13 @@ async function shouldAuthenticateAgain()
 }
 
 async function UpdateControlsToAuthenticated() {
-    document.getElementById("auth-status").textContent = "Authenticated";
-    document.getElementById("btn login-btn").style.display = "none";
+    document.getElementById("authStatus").textContent = "Authenticated";
+    document.getElementById("loginButton").style.display = "none";
 }
 
 async function UpdateControlsToNotAuthenticated() {
-    document.getElementById("auth-status").textContent = "Not authenticated";
-    document.getElementById("btn login-btn").style.display = "block";
+    document.getElementById("authStatus").textContent = "Not authenticated";
+    document.getElementById("loginButton").style.display = "block";
 }
 
 // Periodically check for updates (e.g., every second)
