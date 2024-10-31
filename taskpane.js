@@ -8,7 +8,7 @@ Office.onReady().then(function () {
     isInitialized = true;
 
     // Ensure the DOM is loaded before setting up the button click handler
-    document.getElementById("loginButton").addEventListener("click", authenticateUser);
+    document.getElementById("btn login-btn").addEventListener("click", authenticateUser);
 
     console.log("Office is ready.");
     const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
