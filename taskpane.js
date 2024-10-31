@@ -47,16 +47,15 @@ function authenticateUser() {
                     let authenticationStarted = false;
 
                     // Update UI to show authenticated status
-                    document.getElementById("authStatus").textContent = "Authenticated";
-                    document.getElementById("loginButton").style.display = "none";
+                    await UpdateControlsToAuthenticated();
                 } catch (error) {
                     console.error("Error fetching JWT token:", error);
-                    document.getElementById("authStatus").textContent = "Error fetching JWT token";
+                    document.getElementById("auth-status").textContent = "Error fetching JWT token";
                 }
 
             } else if (event.data.type === "AUTH_FAILURE") {
                 console.log("Authentication failed.");
-                document.getElementById("authStatus").textContent = "Authentication failed";
+                document.getElementById("auth-status").textContent = "Authentication failed";
             }
         }
     });
@@ -69,11 +68,9 @@ function checkAuthenticationStatus() {
     console.log("checkAuthenticationStatus token", jwtToken);
 
     if (jwtToken && isTokenValid) {
-        document.getElementById("authStatus").textContent = "Authenticated";
-        document.getElementById("loginButton").style.display = "none";
+        await UpdateControlsToAuthenticated();
     } else {
-        document.getElementById("authStatus").textContent = "Not authenticated";
-        document.getElementById("loginButton").style.display = "block";
+        await UpdateControlsToNotAuthenticated();
     }
 }
 
@@ -88,12 +85,19 @@ async function shouldAuthenticateAgain()
     const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
     if (isTokenValid !== true) {
         authenticationStarted = true;
-
-        document.getElementById("authStatus").textContent = "Not authenticated";
-        document.getElementById("loginButton").style.display = "block";
-
+        await UpdateControlsToNotAuthenticated();
         Office.addin.showAsTaskpane()
     }
+}
+
+async function UpdateControlsToAuthenticated() {
+    document.getElementById("auth-status").textContent = "Authenticated";
+    document.getElementById("btn login-btn").style.display = "none";
+}
+
+async function UpdateControlsToNotAuthenticated() {
+    document.getElementById("auth-status").textContent = "Not authenticated";
+    document.getElementById("btn login-btn").style.display = "block";
 }
 
 // Periodically check for updates (e.g., every second)

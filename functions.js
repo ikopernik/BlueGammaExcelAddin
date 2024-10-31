@@ -90,12 +90,6 @@ async function GetRate(url) {
         }
     });
 
-    ///////////////////
-
-    OfficeRuntime.storage.setItem(isTokenValidName, false);
-    return `Token expired! Status: ${response.status}`;
-    //////////////////
-
     if (response.status === 401) {
         OfficeRuntime.storage.setItem(isTokenValidName, false);
         return `Token expired! Status: ${response.status}`;

@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Excel Add-in</title>
-    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    <script type="text/javascript" src="functions.js"></script>
-    <script type="text/javascript" src="taskpane.js"></script>
-    <!-- <script type="text/javascript" src="taskpane.js" defer></script>
-    <script type="text/javascript" src="functions.js" defer></script> -->
+    <meta charset="UTF-8">
+    <title>BlueGamma Excel Add-in</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main id="app-body" class="ms-welcome__main">
-        <h1>Welcome to the Excel Add-in</h1>
-        <div id="auth-container">
-            <button id="loginButton">Login</button>
-        </div>
-        <p id="authStatus">Not authenticated</p>
-    </main>
+    <div class="task-pane">
+        <header class="task-pane-header">
+            <img src="https://dev.bluegamma.io/_next/image?url=%2Flogo.png&w=96&q=75" alt="BlueGamma.io Logo" class="logo">
+            <h1 class="plugin-title">BlueGamma Excel Add-in</h1>
+        </header>
+        <main class="task-pane-content">
+            <section class="dashboard">
+                <h2 class="dashboard-title">The Fastest Way to Access Interest Rate Data</h2>
+                <p class="intro-text">
+                    Welcome to the BlueGamma Excel Add-in. Access forward curves, swap rates and more directly in your financial model. To get started, log in to your BlueGamma account.
+                </p>
+                <button class="btn login-btn">Login</button>
+                <p class="auth-status">Not authenticated</p>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
