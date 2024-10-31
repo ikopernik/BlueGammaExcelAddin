@@ -64,7 +64,7 @@ function authenticateUser() {
 async function checkAuthenticationStatus() {
     // Retrieve the JWT token from Office Roaming Settings
     const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
-    const isTokenValid = OfficeRuntime.storage.setItem(isTokenValidName);
+    const isTokenValid = OfficeRuntime.storage.getItem(isTokenValidName);
     console.log("checkAuthenticationStatus token", jwtToken);
 
     if (jwtToken && isTokenValid) {
