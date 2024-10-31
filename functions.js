@@ -1,4 +1,5 @@
 ﻿const baseUrl = "https://6v51jtul4e.execute-api.eu-west-2.amazonaws.com/v1/";
+const isTokenValidName = "isTokenValid";
 
 /**
  * Get swap rate
@@ -11,6 +12,11 @@
  * @returns {string} Swap rate
  */
 async function SwapRate(index, start_date, maturity_date, payment_frequency, valuation_time = "") {
+    const isTokenValid = OfficeRuntime.storage.getItem(isTokenValidName);
+    if (!isTokenValid) {
+        return;
+    }
+
     start_date = await GetDate(start_date);
     maturity_date = await GetDate(maturity_date);
 
@@ -28,22 +34,7 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
     const url = baseUrl + "swap_rate?" + params.toString();
     
     try {
-        const token = localStorage.getItem("jwtToken");
-        console.log("token", token);
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) {
-            return `HTTP error! Status: ${response.status}`;
-        }
-
-        const data = await response.json();
-        console.log(data);
+        data = await GetRate(url);
         return data.swap_rate;
     } catch (error) {
         console.error('Error fetching the swap rate:', error);
@@ -60,6 +51,11 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
  * @returns {string} Forward rate
  */
 async function ForwardRate(index, start_date, end_date, valuation_time = "") {
+    const isTokenValid = OfficeRuntime.storage.getItem(isTokenValidName);
+    if (!isTokenValid) {
+        return;
+    }        
+
     start_date = await GetDate(start_date);
     end_date = await GetDate(end_date);
 
@@ -76,26 +72,41 @@ async function ForwardRate(index, start_date, end_date, valuation_time = "") {
     const url = baseUrl + "forward_rate?" + params.toString();
 
     try {
-        const token = localStorage.getItem("jwtToken");
-        console.log("token", token);
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) {
-            return `HTTP error! Status: ${response.status}`;
-        }
-
-        const data = await response.json();
-        console.log(data);
+        data = await GetRate(url);
         return data.forward_rate;
     } catch (error) {
         console.error('Error fetching the forward rate:', error);
     }
+}
+
+async function GetRate(url) {
+    const token = OfficeRuntime.storage.getItem("jwtToken");
+    console.log("token", token);
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    ///////////////////
+
+    OfficeRuntime.storage.setItem(isTokenValidName, false);
+    return `Token expired! Status: ${response.status}`;
+    //////////////////
+
+    if (response.status === 401) {
+        OfficeRuntime.storage.setItem(isTokenValidName, false);
+        return `Token expired! Status: ${response.status}`;
+    }
+    else if (!response.ok) {
+        return `HTTP error! Status: ${response.status}`;
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
 }
 
 async function GetDate(dateInput) {

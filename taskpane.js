@@ -1,4 +1,5 @@
 let isInitialized = false;
+const isTokenValidName = "isTokenValid";
 
 document.addEventListener("DOMContentLoaded", function () {
     // Check if the initialization has already been done
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loginButton").addEventListener("click", authenticateUser);
 
     console.log("Office is ready.");
-    const jwtToken = localStorage.getItem("jwtToken");
+    const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
     // Check if the user is already authenticated on load
     checkAuthenticationStatus();
 });
@@ -42,11 +43,9 @@ function authenticateUser() {
                     console.log("Received JWT Token:", jwtToken);
 
                     // Store the JWT token for future use
-                    localStorage.setItem("jwtToken", jwtToken);
-
-                    // Retrieve the token from storage to confirm it was saved correctly
-                    //const retrievedToken = localStorage.getItem("jwtToken");
-                    //console.log("retrieved JWT:", retrievedToken);
+                    OfficeRuntime.storage.setItem("jwtToken", jwtToken);
+                    OfficeRuntime.storage.setItem(isTokenValidName, true);
+                    let authenticationStarted = false;
 
                     // Update UI to show authenticated status
                     document.getElementById("authStatus").textContent = "Authenticated";
@@ -55,6 +54,7 @@ function authenticateUser() {
                     console.error("Error fetching JWT token:", error);
                     document.getElementById("authStatus").textContent = "Error fetching JWT token";
                 }
+
             } else if (event.data.type === "AUTH_FAILURE") {
                 console.log("Authentication failed.");
                 document.getElementById("authStatus").textContent = "Authentication failed";
@@ -65,10 +65,11 @@ function authenticateUser() {
 
 function checkAuthenticationStatus() {
     // Retrieve the JWT token from Office Roaming Settings
-    const jwtToken = localStorage.getItem("jwtToken");
+    const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
+    const isTokenValid = OfficeRuntime.storage.setItem(isTokenValidName);
     console.log("checkAuthenticationStatus token", jwtToken);
 
-    if (jwtToken) {
+    if (jwtToken && isTokenValid) {
         document.getElementById("authStatus").textContent = "Authenticated";
         document.getElementById("loginButton").style.display = "none";
     } else {
@@ -76,6 +77,24 @@ function checkAuthenticationStatus() {
         document.getElementById("loginButton").style.display = "block";
     }
 }
+
+let authenticationStarted = false;
+
+async function shouldAuthenticateAgain()
+{
+    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
+    if (!isTokenValid && !authenticationStarted) {
+        authenticationStarted = true;
+
+        // Your logic to show or bring attention to the task pane
+        document.getElementById("taskPaneContent").style.display = "block";
+
+        document.getElementById("authStatus").textContent = "Not authenticated";
+        document.getElementById("loginButton").style.display = "block";
+    }
+}
+
+
 
 // Initialize SecureLS
 //const ls = new SecureLS({ encodingType: 'aes' });
