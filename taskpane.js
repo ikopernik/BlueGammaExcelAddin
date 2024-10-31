@@ -94,7 +94,8 @@ async function shouldAuthenticateAgain()
     }
 }
 
-
+// Periodically check for updates (e.g., every second)
+setInterval(checkForTaskPaneFlag, 1000);
 
 // Initialize SecureLS
 //const ls = new SecureLS({ encodingType: 'aes' });
