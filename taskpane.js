@@ -81,12 +81,12 @@ let authenticationStarted = false;
 
 async function shouldAuthenticateAgain()
 {
-    if (!isInitialized) {
+    if (!isInitialized || authenticationStarted) {
         return;
     }
 
     const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
-    if (isTokenValid !== true && !authenticationStarted) {
+    if (isTokenValid !== true) {
         authenticationStarted = true;
 
         document.getElementById("authStatus").textContent = "Not authenticated";
