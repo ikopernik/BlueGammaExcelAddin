@@ -1,7 +1,6 @@
 let isInitialized = false;
-const isTokenValidName = "isTokenValid";
 
-document.addEventListener("DOMContentLoaded", function () {
+Office.onReady().then(function () {
     // Check if the initialization has already been done
     if (isInitialized) {
         return; // If already initialized, exit the function
@@ -82,30 +81,20 @@ let authenticationStarted = false;
 
 async function shouldAuthenticateAgain()
 {
-    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
-    if (!isTokenValid && !authenticationStarted) {
-        authenticationStarted = true;
+    if (!isInitialized) {
+        return;
+    }
 
-        // Your logic to show or bring attention to the task pane
-        document.getElementById("taskPaneContent").style.display = "block";
+    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
+    if (isTokenValid !== true && !authenticationStarted) {
+        authenticationStarted = true;
 
         document.getElementById("authStatus").textContent = "Not authenticated";
         document.getElementById("loginButton").style.display = "block";
+
+        Office.addin.showAsTaskpane()
     }
 }
 
 // Periodically check for updates (e.g., every second)
-setInterval(checkForTaskPaneFlag, 1000);
-
-// Initialize SecureLS
-//const ls = new SecureLS({ encodingType: 'aes' });
-
-// Storing the JWT token
-//function storeToken(token) {
-//    ls.set('jwtToken', token);
-//}
-
-// Retrieving the JWT token
-//function getToken() {
-//    return ls.get('jwtToken');
-//}
+setInterval(shouldAuthenticateAgain, 1000);
