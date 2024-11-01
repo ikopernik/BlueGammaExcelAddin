@@ -82,7 +82,7 @@ async function shouldAuthenticateAgain()
     }
 
     const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
-    if (isTokenValid != true) {
+    if (isTokenValid != "true") {
         authenticationStarted = true;
         await UpdateControlsToNotAuthenticated();
         Office.addin.showAsTaskpane()
