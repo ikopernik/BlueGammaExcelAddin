@@ -11,7 +11,6 @@ Office.onReady().then(async function () {
     document.getElementById("loginButton").addEventListener("click", authenticateUser);
 
     console.log("Office is ready.");
-    const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
     // Check if the user is already authenticated on load
     await checkAuthenticationStatus();
 });
@@ -63,11 +62,11 @@ function authenticateUser() {
 
 async function checkAuthenticationStatus() {
     // Retrieve the JWT token from Office Roaming Settings
-    const jwtToken = OfficeRuntime.storage.getItem("jwtToken");
-    const isTokenValid = OfficeRuntime.storage.getItem(isTokenValidName);
+    const jwtToken = await OfficeRuntime.storage.getItem("jwtToken");
+    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
     console.log("checkAuthenticationStatus token", jwtToken);
 
-    if (jwtToken && isTokenValid) {
+    if (jwtToken && isTokenValid == "true") {
         await UpdateControlsToAuthenticated();
     } else {
         await UpdateControlsToNotAuthenticated();
@@ -83,7 +82,7 @@ async function shouldAuthenticateAgain()
     }
 
     const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
-    if (isTokenValid !== true) {
+    if (isTokenValid != true) {
         authenticationStarted = true;
         await UpdateControlsToNotAuthenticated();
         Office.addin.showAsTaskpane()

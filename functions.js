@@ -13,7 +13,7 @@ const isTokenValidName = "isTokenValid";
  */
 async function SwapRate(index, start_date, maturity_date, payment_frequency, valuation_time = "") {
     const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
-    if (!isTokenValid) {
+    if (isTokenValid != "true") {
         return;
     }
 
@@ -52,7 +52,7 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
  */
 async function ForwardRate(index, start_date, end_date, valuation_time = "") {
     const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
-    if (!isTokenValid) {
+    if (isTokenValid != "true") {
         return;
     }        
 
