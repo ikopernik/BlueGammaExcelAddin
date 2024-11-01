@@ -12,7 +12,7 @@ const isTokenValidName = "isTokenValid";
  * @returns {string} Swap rate
  */
 async function SwapRate(index, start_date, maturity_date, payment_frequency, valuation_time = "") {
-    const isTokenValid = OfficeRuntime.storage.getItem(isTokenValidName);
+    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
     if (!isTokenValid) {
         return;
     }
@@ -51,7 +51,7 @@ async function SwapRate(index, start_date, maturity_date, payment_frequency, val
  * @returns {string} Forward rate
  */
 async function ForwardRate(index, start_date, end_date, valuation_time = "") {
-    const isTokenValid = OfficeRuntime.storage.getItem(isTokenValidName);
+    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
     if (!isTokenValid) {
         return;
     }        
@@ -80,7 +80,7 @@ async function ForwardRate(index, start_date, end_date, valuation_time = "") {
 }
 
 async function GetRate(url) {
-    const token = OfficeRuntime.storage.getItem("jwtToken");
+    const token = await OfficeRuntime.storage.getItem("jwtToken");
     console.log("token", token);
 
     const response = await fetch(url, {
