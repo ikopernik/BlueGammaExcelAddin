@@ -20,7 +20,19 @@ function authenticateUser() {
     const authUri = "https://dev.bluegamma.io/api/auth/addin?redirectUri=https://ikopernik.github.io/BlueGammaExcelAddin/callback.html";
 
     // window.location.href = authUri;
-    window.open(authUri, "_blank");
+    //window.open(authUri, "_blank");
+
+    /////////////
+
+    if (Office.context.requirements.isSetSupported("ExcelApi", "1.3")) {
+        window.location.href = authUri;
+    } else {
+        window.open(authUri, "_blank");
+    }
+
+    //Office.context.ui.messageParent("Some message", { targetOrigin: authUri });
+
+    /////////////
 
     // Add an event listener for messages from the child window (callback.html)
     window.addEventListener("message", async function (event) {
