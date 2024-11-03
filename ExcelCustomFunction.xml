@@ -13,7 +13,7 @@
   <Id>57c39e34-6535-4e28-99c2-4cc6c5295199</Id>
 
   <Version>1.0.0.0</Version>
-  <ProviderName>[Provider name]</ProviderName>
+  <ProviderName>BlueGamma</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
   <DisplayName DefaultValue="BlueGamma Excel add-in" />
