@@ -1,6 +1,74 @@
 ﻿const baseUrl = "https://6v51jtul4e.execute-api.eu-west-2.amazonaws.com/v1/";
 const isTokenValidName = "isTokenValid";
 
+////////////////////////
+
+/**
+ * Get swap rate
+ * @customfunction
+ * @param {string} token Token
+ * @param {string} index Index
+ * @param {string} start_date Start date
+ * @param {string} maturity_date Maturity date
+ * @param {string} payment_frequency Payment frequency
+ * @param {string} valuation_time Valuation time
+ * @returns {string} Swap rate
+ */
+async function SwapRateWithToken(token, index, start_date, maturity_date, payment_frequency, valuation_time = "") {
+    const isTokenValid = await OfficeRuntime.storage.getItem(isTokenValidName);
+    if (isTokenValid != "true") {
+        return;
+    }
+
+    start_date = await GetDate(start_date);
+    maturity_date = await GetDate(maturity_date);
+
+    const params = new URLSearchParams({
+        index: index,
+        start_date: start_date,
+        maturity_date: maturity_date,
+        payment_frequency: payment_frequency
+    });
+
+    if (valuation_time) {
+        params.append("valuation_time", valuation_time);
+    }
+
+    const url = baseUrl + "swap_rate?" + params.toString();
+
+    try {
+        data = await GetRateWithToken(token, url);
+        return data.swap_rate;
+    } catch (error) {
+        console.error('Error fetching the swap rate:', error);
+    }
+}
+
+async function GetRateWithToken(token, url) {
+    console.log("token", token);
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (response.status === 401) {
+        OfficeRuntime.storage.setItem(isTokenValidName, false);
+        return `Token expired! Status: ${response.status}`;
+    }
+    else if (!response.ok) {
+        return `HTTP error! Status: ${response.status}`;
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+//////////////////////////////////////
+
 /**
  * Get swap rate
  * @customfunction

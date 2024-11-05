@@ -1,71 +1,112 @@
 {
-  "functions": [
-    {
-      "description": "Get swap rate",
-      "id": "SwapRate",
-      "name": "SwapRate",
-      "parameters": [
+    "functions": [
         {
-          "description": "index",
-          "name": "index",
-          "type": "string"
-        },
-        {
-          "description": "start date",
-          "name": "start_date",
-          "type": "string"
-        },
-        {
-          "description": "maturity date",
-          "name": "maturity_date",
-          "type": "string"
-        },
-        {
-          "description": "payment frequency",
-          "name": "payment_frequency",
-          "type": "string"
-        },
-        {
-          "description": "valuation time",
-          "name": "valuation_time",
-          "type": "string",
-          "required": false
-        }
-      ],
-      "result": {
-        "type": "number"
-      }
-    },
-    {
-        "description": "Get forward rate",
-        "id": "ForwardRate",
-        "name": "ForwardRate",
-        "parameters": [
-            {
-                "description": "index",
-                "name": "index",
-                "type": "string"
-            },
-            {
-                "description": "start date",
-                "name": "start_date",
-                "type": "string"
-            },
-            {
-                "description": "end date",
-                "name": "maturity_date",
-                "type": "string"
-            },
-            {
-                "description": "valuation time",
-                "name": "valuation_time",
-                "type": "string",
-                "required": false
+            "description": "Get swap rate",
+            "id": "SwapRate",
+            "name": "SwapRate",
+            "parameters": [
+                {
+                    "description": "index",
+                    "name": "index",
+                    "type": "string"
+                },
+                {
+                    "description": "start date",
+                    "name": "start_date",
+                    "type": "string"
+                },
+                {
+                    "description": "maturity date",
+                    "name": "maturity_date",
+                    "type": "string"
+                },
+                {
+                    "description": "payment frequency",
+                    "name": "payment_frequency",
+                    "type": "string"
+                },
+                {
+                    "description": "valuation time",
+                    "name": "valuation_time",
+                    "type": "string",
+                    "required": false
+                }
+            ],
+            "result": {
+                "type": "number"
             }
-        ],
-        "result": {
-            "type": "number"
+        },
+        {
+            "description": "Get forward rate",
+            "id": "ForwardRate",
+            "name": "ForwardRate",
+            "parameters": [
+                {
+                    "description": "index",
+                    "name": "index",
+                    "type": "string"
+                },
+                {
+                    "description": "start date",
+                    "name": "start_date",
+                    "type": "string"
+                },
+                {
+                    "description": "end date",
+                    "name": "maturity_date",
+                    "type": "string"
+                },
+                {
+                    "description": "valuation time",
+                    "name": "valuation_time",
+                    "type": "string",
+                    "required": false
+                }
+            ],
+            "result": {
+                "type": "number"
+            }
+        },
+        {
+            "description": "Get swap rate with token",
+            "id": "SwapRateWithToken",
+            "name": "SwapRateWithToken",
+            "parameters": [
+                {
+                    "description": "token",
+                    "name": "token",
+                    "type": "string"
+                },
+                {
+                    "description": "index",
+                    "name": "index",
+                    "type": "string"
+                },
+                {
+                    "description": "start date",
+                    "name": "start_date",
+                    "type": "string"
+                },
+                {
+                    "description": "maturity date",
+                    "name": "maturity_date",
+                    "type": "string"
+                },
+                {
+                    "description": "payment frequency",
+                    "name": "payment_frequency",
+                    "type": "string"
+                },
+                {
+                    "description": "valuation time",
+                    "name": "valuation_time",
+                    "type": "string",
+                    "required": false
+                }
+            ],
+            "result": {
+                "type": "number"
+            }
         }
-    }
-  ]
+    ]
 }
