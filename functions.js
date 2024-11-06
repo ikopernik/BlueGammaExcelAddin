@@ -4,7 +4,7 @@ const isTokenValidName = "isTokenValid";
 ////////////////////////
 
 /**
- * Get swap rate
+ * Get swap rate with token
  * @customfunction
  * @param {string} token Token
  * @param {string} index Index
@@ -207,3 +207,4 @@ function formatDate(date) {
 
 CustomFunctions.associate("SwapRate", SwapRate);
 CustomFunctions.associate("ForwardRate", ForwardRate);
+CustomFunctions.associate("SwapRateWithToken", SwapRateWithToken);
