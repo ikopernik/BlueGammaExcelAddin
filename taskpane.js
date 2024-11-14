@@ -20,7 +20,8 @@ function authenticateUser() {
     const authUri = "https://dev.bluegamma.io/api/auth/addin?redirectUri=https://ikopernik.github.io/BlueGammaExcelAddin/callback.html";
 
     // window.location.href = authUri;
-    window.open(authUri, "_blank");
+    //window.open(authUri, "_blank");
+    window.location.href = authUri;
 
     /////////////
 
