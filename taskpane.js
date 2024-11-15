@@ -39,10 +39,10 @@ function authenticateUser() {
     window.addEventListener("message", async function (event) {
         // Check the origin of the message for security
         //if (event.origin === "https://ikopernik.github.io")
-        { // Replace with your actual domain
+        if (true)
+        {
             if (event.data.type === "AUTH_SUCCESS") {
                 console.log("authorizationCode", event.data.authorizationCode);
-
                 try {
                     // Fetch the JWT token using the authentication code
                     const response = await fetch(`https://dev.bluegamma.io/api/auth/jwt?code=${encodeURIComponent(event.data.authorizationCode)}`);
